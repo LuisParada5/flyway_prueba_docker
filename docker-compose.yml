@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:17
+    container_name: flyway-luis # Nombre único para no chocar
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: db_luis
+    volumes:
+      - pgdata_nuevo:/var/lib/postgresql/data # Volumen único
+    ports:
+      - "5436:5432"  # <--- Ahora usamos el 5436 en tu PC
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_dos # Nombre único
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5052:80" # También cambiamos el puerto de pgAdmin al 5052
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata_nuevo:

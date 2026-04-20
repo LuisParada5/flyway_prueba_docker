@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS ninios (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    edad INT NOT NULL
+);
